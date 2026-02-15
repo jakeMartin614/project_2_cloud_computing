@@ -34,22 +34,6 @@ def execute_query(query, args=()):
     cur.close()
     return rows
 
-def init_db():
-    with app.app_context():
-        execute_query('''CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT,
-            password TEXT,
-            firstname TEXT,
-            lastname TEXT,
-            email TEXT,
-            address TEXT,
-            filename TEXT,
-            wordcount INTEGER
-        )''')
-
-init_db()
-
 @app.route('/')
 def register_page():
     return render_template('register.html')
@@ -117,4 +101,5 @@ def upload_file(username):
 @app.route('/download/<filename>')
 def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+
 
