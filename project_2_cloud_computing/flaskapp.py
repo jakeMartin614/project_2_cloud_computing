@@ -56,8 +56,7 @@ def register_page():
 
 @app.route('/register', methods=['POST'])
 def register():
-    if not username or not password:
-        return "Username and password are required.", 400
+
     username = request.form['username']
     password = request.form['password']
     firstname = request.form['firstname']
@@ -65,6 +64,9 @@ def register():
     email = request.form['email']
     address = request.form['address']
 
+    if not username or not password:
+        return "Username and password are required.", 400
+    
     execute_query(
         "INSERT INTO users (username,password,firstname,lastname,email,address) VALUES (?,?,?,?,?,?)",
         (username, password, firstname, lastname, email, address)
@@ -115,3 +117,4 @@ def upload_file(username):
 @app.route('/download/<filename>')
 def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+
