@@ -1,0 +1,21 @@
+<h2>User Profile</h2>
+
+<p>Username: {{ user[1] }}</p>
+<p>First Name: {{ user[3] }}</p>
+<p>Last Name: {{ user[4] }}</p>
+<p>Email: {{ user[5] }}</p>
+<p>Address: {{ user[6] }}</p>
+
+{% if user[8] %}
+<p>Uploaded File: {{ user[7] }}</p>
+<p>Word Count: {{ user[8] }}</p>
+<a href="/download/{{ user[7] }}">Download File</a>
+{% endif %}
+
+<h3>Upload Limerick.txt</h3>
+<form method="POST" action="/upload/{{ user[1] }}" enctype="multipart/form-data">
+<input type="file" name="file">
+<input type="submit" value="Upload">
+</form>
+
+<a href="/">Register New User</a>
